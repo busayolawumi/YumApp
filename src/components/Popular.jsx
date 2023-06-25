@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const Popular = () => {
     const [popular, setPopular] = useState([])
@@ -11,23 +9,24 @@ const Popular = () => {
     }, [])
 
     const getPopular = async() => {
-        const api = await axios.get(`https://api.spoonacular.com/recipes/random?apikey=${process.env.RECIPE_API_KEY}`)
-        console.log();
+        const APIKEY = import.meta.env.VITE_API_KEY;
+        const api = await axios.get(`https://api.spoonacular.com/recipes/random?apiKey=${APIKEY}&number=5`)
+        setPopular(api.data.recipes)
     }
 
     console.log(popular)
 
-//     return (
-//     <div>
-//         {popular.map((recipes) => {
-//             return(
-//                 <div key={}>
-//                     <p>{recipes.recipe.label}</p>
-//                 </div>
-//             )
-//         })}
-//     </div>
-//   )
+return(
+    <div>
+        {popular.map((recipe) => {
+            return(
+                <div key={recipe.id}>
+                    <p>{recipe.title}</p>
+                </div>
+            )
+        })}
+    </div>
+)
 }
 
 export default Popular

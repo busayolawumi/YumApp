@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
+import { styled } from 'styled-components';
 
 const Popular = () => {
     const [popular, setPopular] = useState([])
@@ -17,16 +18,32 @@ const Popular = () => {
     console.log(popular)
 
 return(
-    <div>
+    <Wrapper>
+        <h3>Popular Picks</h3>
         {popular.map((recipe) => {
             return(
-                <div key={recipe.id}>
+                <Card key={recipe.id}>
                     <p>{recipe.title}</p>
-                </div>
+                    <img src={recipe.image} alt={recipe.title} />
+                </Card>
             )
         })}
-    </div>
+    </Wrapper>
 )
 }
+
+const Wrapper = styled.div`
+    margin: 4rem 0rem;
+`
+
+const Card = styled.div`
+    min-height: 25rem;
+    border-radius: 2rem;
+    overflow: hidden;
+
+    img{
+        border-radius: 2rem;
+    }
+`
 
 export default Popular

@@ -21,10 +21,11 @@ const Popular = () => {
 			const api = await axios.get(
 				`https://api.spoonacular.com/recipes/random?apiKey=${APIKEY}&number=5`
 			);
-			setPopular(api.data.recipes);
-		}
 
-		console.log(popular);
+			localStorage.setItem("popular", JSON.stringify(api.data.recipes));
+			setPopular(api.data.recipes);
+			console.log(popular);
+		}
 	};
 
 	return (
@@ -44,7 +45,12 @@ const Popular = () => {
 						<SplideSlide key={recipe.id}>
 							<Card key={recipe.id}>
 								<p>{recipe.title}</p>
-								<img src={recipe.image} alt={recipe.title} />
+								{recipe.image ? (
+									<img
+										src={recipe.image}
+										alt={recipe.title}
+									/>
+								) : null}
 								<Gradient />
 							</Card>
 						</SplideSlide>

@@ -19,7 +19,7 @@ const Popular = () => {
 		} else {
 			const APIKEY = import.meta.env.VITE_API_KEY;
 			const api = await axios.get(
-				`https://api.spoonacular.com/recipes/random?apiKey=${APIKEY}&number=5`
+				`https://api.spoonacular.com/recipes/random?apiKey=${APIKEY}&number=7`
 			);
 
 			localStorage.setItem("popular", JSON.stringify(api.data.recipes));
@@ -66,7 +66,7 @@ const Wrapper = styled.div`
 `;
 
 const Card = styled.div`
-	min-height: 25rem;
+	min-height: 1 5rem;
 	border-radius: 2rem;
 	overflow: hidden;
 	background-color: red;

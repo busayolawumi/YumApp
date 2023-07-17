@@ -24,7 +24,6 @@ const Popular = () => {
 
 			localStorage.setItem("popular", JSON.stringify(api.data.recipes));
 			setPopular(api.data.recipes);
-			console.log(popular);
 		}
 	};
 
@@ -66,7 +65,7 @@ const Wrapper = styled.div`
 `;
 
 const Card = styled.div`
-	min-height: 1 5rem;
+	min-height: 15rem;
 	border-radius: 2rem;
 	overflow: hidden;
 	background-color: red;

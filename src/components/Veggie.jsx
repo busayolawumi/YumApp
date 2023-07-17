@@ -24,7 +24,6 @@ const Veggie = () => {
 
 			localStorage.setItem("veggie", JSON.stringify(api.data.recipes));
 			setVeggie(api.data.recipes);
-			console.log(veggie);
 		}
 	};
 

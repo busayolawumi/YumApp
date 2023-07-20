@@ -68,7 +68,6 @@ const Card = styled.div`
 	min-height: 15rem;
 	border-radius: 2rem;
 	overflow: hidden;
-	background-color: red;
 	position: relative;
 
 	img {

@@ -3,6 +3,7 @@ import axios from "axios";
 import { styled } from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import { Link } from "react-router-dom";
 
 const Veggie = () => {
 	const [veggie, setVeggie] = useState([]);
@@ -43,14 +44,16 @@ const Veggie = () => {
 					return (
 						<SplideSlide key={recipe.id}>
 							<Card key={recipe.id}>
-								<p>{recipe.title}</p>
-								{recipe.image ? (
-									<img
-										src={recipe.image}
-										alt={recipe.title}
-									/>
-								) : null}
-								<Gradient />
+								<Link to={"/recipe/" + recipe.id}>
+									<p>{recipe.title}</p>
+									{recipe.image ? (
+										<img
+											src={recipe.image}
+											alt={recipe.title}
+										/>
+									) : null}
+									<Gradient />
+								</Link>
 							</Card>
 						</SplideSlide>
 					);

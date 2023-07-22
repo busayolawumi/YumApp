@@ -5,28 +5,36 @@ import { styled } from "styled-components";
 
 function Recipe() {
 	let params = useParams();
+
 	const [details, setDetails] = useState({});
-	const [active, setActive] = useState("instructions");
+	const [active, setActive] = useState("summary");
 
 	useEffect(() => {
-		getdetails();
+		getDetails();
 	}, [params.name]);
 
-	const getdetails = async (name) => {
+	const getDetails = async () => {
 		const APIKEY = import.meta.env.VITE_API_KEY;
 		const api = await axios.get(
 			`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${APIKEY}`
 		);
 		setDetails(api.data);
+		console.log(api.data);
 	};
 
 	return (
 		<Wrapper>
 			<div>
 				<h2>{details.title}</h2>
-				<img src={details.image} alt="details.title" />
+				<img src={details.image} alt={details.title} />
 			</div>
 			<Info>
+				<Button
+					className={active === "summary" ? "active" : ""}
+					onClick={() => setActive("summary")}
+				>
+					Summary
+				</Button>
 				<Button
 					className={active === "instructions" ? "active" : ""}
 					onClick={() => setActive("instructions")}
@@ -39,6 +47,31 @@ function Recipe() {
 				>
 					Ingredients
 				</Button>
+				{active === `summary` && (
+					<div>
+						<h3
+							dangerouslySetInnerHTML={{
+								__html: details.summary,
+							}}
+						></h3>
+					</div>
+				)}
+				{active === `instructions` && (
+					<div>
+						<h3
+							dangerouslySetInnerHTML={{
+								__html: details.instructions,
+							}}
+						></h3>
+					</div>
+				)}
+				{active === `ingredients` && (
+					<ul>
+						{details.extendedIngredients?.map((ingredient) => (
+							<li key={ingredient.id}>{ingredient.original}</li>
+						))}
+					</ul>
+				)}
 			</Info>
 		</Wrapper>
 	);
@@ -71,6 +104,7 @@ const Button = styled.button`
 	border: 2px solid black;
 	margin-right: 2rem;
 	font-weight: 600;
+	cursor: pointer;
 `;
 
 const Info = styled.div`

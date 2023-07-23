@@ -19,7 +19,10 @@ function Recipe() {
 			`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${APIKEY}`
 		);
 		setDetails(api.data);
-		console.log(api.data);
+	};
+
+	const removeLinks = (htmlText) => {
+		return htmlText?.replace(/<a\s+href=\"([^\"]+)\">/g, "");
 	};
 
 	return (
@@ -51,7 +54,7 @@ function Recipe() {
 					<div>
 						<h3
 							dangerouslySetInnerHTML={{
-								__html: details.summary,
+								__html: removeLinks(details.summary),
 							}}
 						></h3>
 					</div>

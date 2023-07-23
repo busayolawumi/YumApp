@@ -14,7 +14,7 @@ const App = () => {
 				<Nav>
 					<Logo to={"/"}>
 						<GiKnifeFork />
-						Yumm App
+						Yum App
 					</Logo>
 				</Nav>
 				<Search />
